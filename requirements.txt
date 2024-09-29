@@ -1,0 +1,10 @@
+numpy
+matplotlib
+s3fs
+xarray
+tqdm
+pandas
+pillow
+h5netcdf
+netCDF4
+cartopy
