@@ -52,6 +52,11 @@ import h5netcdf
 # LIBRERÍAS PARA MAPAS Y GEOGRAFÍA
 from cartopy import crs as ccrs
 import cartopy.feature as cfeature
+# LIBRERÍAS PARA GRÁFICOS
+import matplotlib as mpl
+from matplotlib import pyplot as plt
+from matplotlib.offsetbox import AnchoredText
+import matplotlib.ticker as ticker
 
 ######################################################
 #######   CONEXIÓN A AMAZON WEB SERVICES   ###########
@@ -200,72 +205,72 @@ def get_aod_places(day):
     ######################################################
     # Loop through list of ABI files on NODD
     # Open each file remotely, subset variables & save as a new .nc file
-    orig_files_paths = []
-    file = last_file
-    fname = file.split('/')[-1]
-    subname = "sub_" + fname
-    #print(file.split('/')[-1])  # Print the ABI file name
-    fpath = (Path(abi_path) / file.split('/')[-1]).as_posix()
-    orig_files_paths.append(fpath)
-    trimmedpath = (Path(abi_path) / subname).as_posix()
-    if not os.path.exists(trimmedpath):
-        if not os.path.exists(fpath):
-            fs.get(file, fpath)
-            with xr.open_dataset(fpath, engine = 'h5netcdf') as ds:
-                subset_abi_file(ds, upper_left_latitude, upper_left_longitude,lower_right_latitude, lower_right_longitude, fname)
-    if os.path.exists(fpath) and flush_orig:
-        os.remove(fpath)
-    else:
-        print('file exists, yay!')
 
-    print('Downloaded!')
+    def getting_aodd(file):
+        fname = file.split('/')[-1]
+        subname = "sub_" + fname
+        #print(file.split('/')[-1])  # Print the ABI file name
+        fpath = (Path(abi_path) / file.split('/')[-1]).as_posix()
+        trimmedpath = (Path(abi_path) / subname).as_posix()
+        if not os.path.exists(trimmedpath):
+            if not os.path.exists(fpath):
+                fs.get(file, fpath)
+                with xr.open_dataset(fpath, engine = 'h5netcdf') as ds:
+                    subset_abi_file(ds, upper_left_latitude, upper_left_longitude,lower_right_latitude, lower_right_longitude, fname)
+        if os.path.exists(fpath) and flush_orig:
+            os.remove(fpath)
+        else:
+            print('file exists, yay!')
 
-
-    ds = xr.open_dataset(trimmedpath)
-    latitude_array, longitude_array = calculate_abi_lat_lon(ds)
-    print('GOES-16 constants defined!')
+        print('Downloaded!')
 
 
-    with xr.open_dataset(trimmedpath, engine='netcdf4') as ds:
-        # Convert "DQF" DataArray to correct data type
-        DQF = ds.DQF.astype('uint8')
+        ds = xr.open_dataset(trimmedpath)
+        latitude_array, longitude_array = calculate_abi_lat_lon(ds)
+        print('GOES-16 constants defined!')
 
-        # Set AOD data quality for plot
-        if quality == 'high':
-            plot_quality = (DQF == 0)
-        elif quality == 'top2':
-            plot_quality = (DQF <= 1)
-        elif quality == 'all':
-            plot_quality = (DQF <= 2)
+
+        with xr.open_dataset(trimmedpath, engine='netcdf4') as ds:
+            # Convert "DQF" DataArray to correct data type
+            DQF = ds.DQF.astype('uint8')
+
+            # Set AOD data quality for plot
+            if quality == 'high':
+                plot_quality = (DQF == 0)
+            elif quality == 'top2':
+                plot_quality = (DQF <= 1)
+            elif quality == 'all':
+                plot_quality = (DQF <= 2)
+            
+            aod_arr = ds.AOD.where(plot_quality)
+
+
+        ### GETTING THE INDEXES FOR THE PIXELS
+        #aod data saved
+        aod_data = open('aod_places.csv','+a')
+        places = pd.read_csv('stations.csv')
+        datestmp = file.split('/')[-1].split('_')[3][8:12]
+        h_real = int(datestmp[:2])
+        m_real = int(datestmp[2:])
+
+        aods = []
+        for _,s in places.iterrows():
+            station = s.codename
+            lat = s.lat
+            lon = s.lon
+            distances = np.sqrt((latitude_array - lat) ** 2 + (longitude_array - lon) ** 2)   
+            idxs = np.argwhere(distances == np.min(distances))[0]
+            aod_place = np.array(aod_arr)[idxs[0],idxs[1]]
+            aods.append(aod_place)
+
+        a = ','.join([str(i) for i in aods])
+        a = dt.datetime.strftime(dt.datetime(y,m,d,h_real,m_real), '%Y-%m-%d %H:%M,') + a
+        print(a, file = aod_data)
+
+        os.remove(trimmedpath)
         
-        aod_arr = ds.AOD.where(plot_quality)
-
-
-    ### GETTING THE INDEXES FOR THE PIXELS
-    #aod data saved
-    aod_data = open('aod_places.csv','+a')
-    places = pd.read_csv('stations.csv')
-    datestmp = file.split('/')[-1].split('_')[3][8:12]
-    h_real = int(datestmp[:2])
-    m_real = int(datestmp[2:])
-
-    aods = []
-    for _,s in places.iterrows():
-        station = s.codename
-        lat = s.lat
-        lon = s.lon
-        distances = np.sqrt((latitude_array - lat) ** 2 + (longitude_array - lon) ** 2)   
-        idxs = np.argwhere(distances == np.min(distances))[0]
-        aod_place = np.array(aod_arr)[idxs[0],idxs[1]]
-        aods.append(aod_place)
-
-    a = ','.join([str(i) for i in aods])
-    a = dt.datetime.strftime(dt.datetime(y,m,d,h_real,m_real), '%Y-%m-%d %H:%M,') + a
-    print(a, file = aod_data)
-
-    os.remove(trimmedpath)
-        
-
+    getting_aodd(fils[-1])
+    getting_aodd(fils[2])
 
 ######################################################
 #########   OBTENIENDO DIAS A DESCARGAR    ###########
