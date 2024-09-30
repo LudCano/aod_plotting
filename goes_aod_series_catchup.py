@@ -52,11 +52,6 @@ import h5netcdf
 # LIBRERÍAS PARA MAPAS Y GEOGRAFÍA
 from cartopy import crs as ccrs
 import cartopy.feature as cfeature
-# LIBRERÍAS PARA GRÁFICOS
-import matplotlib as mpl
-from matplotlib import pyplot as plt
-from matplotlib.offsetbox import AnchoredText
-import matplotlib.ticker as ticker
 
 ######################################################
 #######   CONEXIÓN A AMAZON WEB SERVICES   ###########
