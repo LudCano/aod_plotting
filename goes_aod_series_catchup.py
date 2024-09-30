@@ -268,9 +268,15 @@ def get_aod_places(day):
         print(a, file = aod_data)
 
         os.remove(trimmedpath)
-        
-    getting_aodd(fils[-1])
-    getting_aodd(fils[2])
+
+    try:
+        getting_aodd(fils[-1])
+    except:
+        exit()
+    try:
+        getting_aodd(fils[2])
+    except:
+        exit()
 
 ######################################################
 #########   OBTENIENDO DIAS A DESCARGAR    ###########
