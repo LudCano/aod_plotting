@@ -1,9 +1,7 @@
 name: Goes catchup
 
 on:
-  schedule:
-    - cron: '0 15 * * *'  # Ejecuta todos los días a las 15:00 UTC
-  workflow_dispatch:
+  workflow_dispatch: #Solo debe ejecutarse si es necesario
 
 jobs:
   run_python_script:
