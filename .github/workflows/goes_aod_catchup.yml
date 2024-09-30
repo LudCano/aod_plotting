@@ -1,4 +1,4 @@
-name: Goes download
+name: Goes catchup
 
 on:
   schedule:
