@@ -98,7 +98,7 @@ ax.grid(which='minor', axis = 'x', alpha = 0.3)
 ax.set_xlabel('Date')
 ax.set_ylabel('Aerosol Optical Depth (daily mean)')
 ax.set_title(f'AOD last {days_to_dwnload} days', fontsize = 10)
-fig.savefig(f'../current_plots/week_aod.png', dpi = 120)
+fig.savefig(f'current_plots/week_aod.png', dpi = 120)
 
 
 
@@ -121,4 +121,4 @@ todayformatted = dt.datetime.strftime(today - dt.timedelta(minutes=today.minute)
 ax.set_title(f'AOD {todayformatted}', fontsize = 10)
 fig.savefig(f'aod_daily/{todayformatted}.png', dpi = 120)
 
-#for f in fnames: os.remove(f)
+for f in fnames: os.remove(f)
