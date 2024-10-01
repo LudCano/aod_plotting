@@ -33,10 +33,10 @@ colors2 = ['darkcyan', 'darkblue', 'darkred']
 
 print('Downloading data...')
 
-# for instrument in instruments:
-#     req = f'wget --no-check-certificate  -q  -O cimel_{instrument}.csv "https://aeronet.gsfc.nasa.gov/cgi-bin/print_web_data_v3?site={instrument}&year={y0}&month={m0}&day={d0}&year2={yf}&month2={mf}&day2={df}&AOD15=1&AVG=10&if_no_html=1"'
-#     os.system(req)
-#     print(f'cimel_{instrument}.csv DOWNLOADED')
+for instrument in instruments:
+    req = f'wget --no-check-certificate  -q  -O cimel_{instrument}.csv "https://aeronet.gsfc.nasa.gov/cgi-bin/print_web_data_v3?site={instrument}&year={y0}&month={m0}&day={d0}&year2={yf}&month2={mf}&day2={df}&AOD15=1&AVG=10&if_no_html=1"'
+    os.system(req)
+    print(f'cimel_{instrument}.csv DOWNLOADED')
 
 fnames = [f'cimel_{i}.csv' for i in instruments]
 
