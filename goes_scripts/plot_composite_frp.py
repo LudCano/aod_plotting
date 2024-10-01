@@ -197,4 +197,4 @@ fig.savefig(f'current_plots/composite_frp.png', dpi = 500)
 for f in os.listdir('descarga_frp'):
     pth = os.path.join('descarga_frp', f)
     os.remove(pth)
-print('All files were removed')
+print('All FRP files were removed')
