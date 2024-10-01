@@ -17,7 +17,7 @@
 outdir     = 'descarga_live_aod'   #carpeta donde descargar los datos, se creará si no existe
 flush_orig = True       #Eliminar los archivos originales (sin cortar)
 quality = 'top2'
-date_start = '2024-09-27'
+date_start = '2024-09-28'
 date_end   = '2024-09-30'
 hrs_start = 7
 hrs_end   = 18
@@ -247,7 +247,7 @@ def get_aod_places(day):
 
         ### GETTING THE INDEXES FOR THE PIXELS
         #aod data saved
-        aod_data = open('aod_places.csv','+a')
+        aod_data = open('goes_scripts/aod_places.csv','+a')
         places = pd.read_csv('stations.csv')
         datestmp = file.split('/')[-1].split('_')[3][8:12]
         h_real = int(datestmp[:2])
