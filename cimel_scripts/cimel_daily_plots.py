@@ -105,6 +105,8 @@ fig.savefig(f'current_plots/week_aod.png', dpi = 120)
 
 dfs2 = [proc_csv2(f'cimel_{i}.csv') for i in instruments]
 
+if os.path.exists('current_plots/yesterday_aod.png'):
+    os.remove('current_plots/yesterday_aod.png')
 
 fig, ax = plt.subplots(figsize=(7,3.5), dpi = 200)
 plot_aod500_day(ax, dfs2, codenames, colors, goes_aod, codenames2, colors2)
@@ -124,5 +126,6 @@ if os.path.exists(f'aod_daily/{todayformatted}.png'):
     os.remove(f'aod_daily/{todayformatted}.png')
 ax.set_title(f'AOD {todayformatted}', fontsize = 10)
 fig.savefig(f'aod_daily/{todayformatted}.png', dpi = 120)
+fig.savefig(f'current_plots/yesterday_aod.png', dpi = 120)
 
 for f in fnames: os.remove(f)
