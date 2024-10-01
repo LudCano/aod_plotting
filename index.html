@@ -31,6 +31,17 @@
             max-width: 100%;
             height: auto; /* Asegura que la imagen se adapte al contenedor */
         }
+
+        /* Media query para dispositivos móviles */
+        @media (max-width: 600px) {
+            body {
+                flex-direction: column; /* Apila las columnas */
+            }
+            .col-izquierda, .col-derecha {
+                flex: 1; /* Hacen que ambas columnas tengan el mismo ancho */
+                padding: 10px; /* Menos padding en móviles */
+            }
+        }
     </style>
 </head>
 <body>
