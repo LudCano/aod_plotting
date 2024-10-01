@@ -248,7 +248,7 @@ def get_aod_places(day):
         ### GETTING THE INDEXES FOR THE PIXELS
         #aod data saved
         aod_data = open('goes_scripts/aod_places.csv','+a')
-        places = pd.read_csv('stations.csv')
+        places = pd.read_csv('goes_scripts/stations.csv')
         datestmp = file.split('/')[-1].split('_')[3][8:12]
         h_real = int(datestmp[:2])
         m_real = int(datestmp[2:])
@@ -266,6 +266,7 @@ def get_aod_places(day):
         a = ','.join([str(i) for i in aods])
         a = dt.datetime.strftime(dt.datetime(y,m,d,h_real,m_real), '%Y-%m-%d %H:%M,') + a
         print(a, file = aod_data)
+        print(a)
 
         os.remove(trimmedpath)
 
