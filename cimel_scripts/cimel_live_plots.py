@@ -62,6 +62,7 @@ goes_aod = pd.read_csv('goes_scripts/aod_places.csv', parse_dates = ['datetime']
 
 dfs2 = [proc_csv2(f'cimel_{i}.csv') for i in instruments]
 
+os.remove('current_plots/live_aod.png')
 
 fig, ax = plt.subplots(figsize=(7,3.5), dpi = 200)
 plot_aod500_day(ax, dfs2, codenames, colors, goes_aod, codenames2, colors2)
