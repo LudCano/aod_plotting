@@ -194,9 +194,6 @@ if os.path.exists('current_plots/composite_frp.png'):
     os.remove('current_plots/composite_frp.png')
 fig.savefig(f'current_plots/composite_frp.png', dpi = 500)
 
-for f in os.listdir(dir_data):
-    pth = os.path.join(dir_data, f)
-    os.remove(pth)
 for f in os.listdir('descarga_frp'):
     pth = os.path.join('descarga_frp', f)
     os.remove(pth)
