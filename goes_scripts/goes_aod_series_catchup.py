@@ -17,8 +17,8 @@
 outdir     = 'descarga_live_aod'   #carpeta donde descargar los datos, se creará si no existe
 flush_orig = True       #Eliminar los archivos originales (sin cortar)
 quality = 'top2'
-date_start = '2024-09-24'
-date_end   = '2024-09-27'
+date_start = '2024-09-27'
+date_end   = '2024-09-30'
 hrs_start = 7
 hrs_end   = 18
 
