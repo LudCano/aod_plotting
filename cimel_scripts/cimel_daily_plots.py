@@ -83,7 +83,8 @@ goes_daily = goes_aod.set_index('datetime')
 goes_daily = goes_daily.resample('1D').mean()
 goes_daily.reset_index(inplace = True)
 
-os.remove(f'current_plots/week_aod.png')
+if os.path.exists('current_plots/week_aod.png'):
+    os.remove(f'current_plots/week_aod.png')
 
 fig, ax = plt.subplots(figsize=(7,3.5), dpi = 200)
 plot_aod500(ax, dfs, codenames, colors, goes_daily, codenames2, colors2)
