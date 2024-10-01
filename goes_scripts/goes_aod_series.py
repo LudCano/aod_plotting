@@ -240,7 +240,7 @@ with xr.open_dataset(trimmedpath, engine='netcdf4') as ds:
 
 ### GETTING THE INDEXES FOR THE PIXELS
 #aod data saved
-aod_data = open('aod_places.csv','+a')
+aod_data = open('goes_scripts/aod_places.csv','+a')
 places = pd.read_csv('stations.csv')
 datestmp = file.split('/')[-1].split('_')[3][8:12]
 h_real = int(datestmp[:2])
