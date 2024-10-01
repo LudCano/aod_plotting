@@ -156,4 +156,4 @@ fig.savefig(f'current_plots/composite.png', dpi = 500)
 for f in os.listdir(dir_data):
     pth = os.path.join(dir_data, f)
     os.remove(pth)
-print('All files were removed')
+print('All AOD files were removed')
