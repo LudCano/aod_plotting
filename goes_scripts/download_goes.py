@@ -43,7 +43,7 @@ from tqdm import tqdm        # barra de progreso
 import h5netcdf
 
 
-today = dt.datetime.now() 
+today = dt.datetime.now() + dt.timedelta(days = -1)
 today = today.date().strftime('%Y-%m-%d')
 print('TODAY IS' ,today)
 date0 = today
@@ -84,7 +84,7 @@ else:
    lst_dates = list(pd.date_range(d0, df, freq='D'))
    
 
-files_to_dwnld = []
+files_to_dwnld0 = []
 for day in lst_dates:
     y = day.year
     m = day.month
@@ -94,9 +94,26 @@ for day in lst_dates:
     print("JULIAN DAY: ----",julian_day)
     for h in range(0,15):
         data_path = bucket + '/' + product + '/'  + str(y) + '/' + julian_day + '/' + str(h).zfill(2)
-        fils = sorted(fs.ls(data_path))
-        if len(fils) > 0:
-            files_to_dwnld = files_to_dwnld + [fils[i] for i in idxs]
+        try:
+            fils = sorted(fs.ls(data_path))
+            if len(fils) > 0:
+                files_to_dwnld0 = files_to_dwnld0 + [fils[i] for i in idxs]
+        except:
+            print('No files')
+
+
+fnames = [i.split('/')[-1] for i in files_to_dwnld0]
+
+start = '1230'
+end = '1430'
+quality = 'top2'
+
+files_to_dwnld = []
+for u,i in zip(sorted(files_to_dwnld0),sorted(fnames)):
+    hr = int(i[30:34])
+    if hr>=int(start) and hr<=int(end):
+        files_to_dwnld.append(u)
+        
 
 
 
@@ -186,7 +203,7 @@ if not os.path.exists(outdir):
 # Loop through list of ABI files on NODD
 # Open each file remotely, subset variables & save as a new .nc file
 orig_files_paths = []
-for file in tqdm(files_to_dwnld[58:74], desc='Downloading'):
+for file in tqdm(files_to_dwnld, desc='Downloading'):
     fname = file.split('/')[-1]
     subname = "sub_" + fname
     #print(file.split('/')[-1])  # Print the ABI file name
@@ -204,9 +221,3 @@ for file in tqdm(files_to_dwnld[58:74], desc='Downloading'):
         print(file.split('/')[-1], 'exists')
 
 print('Done!')
-
-
-
-
-
-
