@@ -9,6 +9,7 @@ import os
 ## https://aeronet.gsfc.nasa.gov/print_web_data_help_v3_new.html
 ## Request ----> 'wget --no-check-certificate  -q  -O test.out "https://aeronet.gsfc.nasa.gov/cgi-bin/print_web_data_v3?site=La_Paz&year=2024&month=6&day=5&year2=2024&month2=6&day2=6&AOD15=1&AVG=10"
 
+print(os.getcwd())
 
 ### DOWNLOADING LAST N DAYS
 days_to_dwnload = 7
@@ -118,6 +119,6 @@ ax.set_xlabel('Hour (UTC)')
 ax.set_ylabel('Aerosol Optical Depth')
 todayformatted = dt.datetime.strftime(today - dt.timedelta(minutes=today.minute), '%Y-%m-%d')
 ax.set_title(f'AOD {todayformatted}', fontsize = 10)
-fig.savefig(f'../aod_daily/{todayformatted}.png', dpi = 120)
+fig.savefig(f'aod_daily/{todayformatted}.png', dpi = 120)
 
 #for f in fnames: os.remove(f)
