@@ -77,7 +77,7 @@ def plot_aod500_day(ax, dfs,places, colors, df2, places2, colors2):
 
 
 
-goes_aod = pd.read_csv('aod_places.csv', parse_dates = ['datetime'])
+goes_aod = pd.read_csv('goes_scripts/aod_places.csv', parse_dates = ['datetime'])
 
 goes_daily = goes_aod.set_index('datetime')
 goes_daily = goes_daily.resample('1D').mean()
