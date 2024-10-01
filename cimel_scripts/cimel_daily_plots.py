@@ -13,7 +13,7 @@ print(os.getcwd())
 
 ### DOWNLOADING LAST N DAYS
 days_to_dwnload = 7
-today = dt.datetime.now() + dt.timedelta(hours = 10) - dt.timedelta(days = 1)
+today = dt.datetime.now() -dt.timedelta(days = 1)
 date_start = (today + dt.timedelta(days = -days_to_dwnload)).strftime('%Y-%m-%d')
 date_end = today.strftime('%Y-%m-%d')
 
