@@ -283,7 +283,7 @@ def get_aod_places(day):
 ######################################################
 d0 = dt.datetime.strptime(date_start, '%Y-%m-%d')
 n_days = int(date_end.split('-')[-1]) - int(date_start.split('-')[-1]) + 1
-for i in range(n_days):
+for i in range(2):
     day0 = d0 + dt.timedelta(days = i)
     for h in range(hrs_start, hrs_end+1):
         day = day0 + dt.timedelta(hours = h)
