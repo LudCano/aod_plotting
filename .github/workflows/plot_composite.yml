@@ -24,9 +24,11 @@ jobs:
       - name: Run download script
         run: |
           python goes_scripts/download_goes.py  # Ejecuta tu script
+          python goes_scripts/download_frp.py
       - name: Run plotting composite script
         run: |
           python goes_scripts/plot_composite.py  # Ejecuta tu script
+          python goes_scripts/plot_composite_frp.py
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
