@@ -3,7 +3,7 @@ name: CIMEL live plotting
 on:
   schedule:
     - cron: '30 11-21 * * *'  # Ejecutar cada hora; ajusta según lo necesites
-  #workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -24,7 +24,7 @@ jobs:
         pip install -r requirements.txt  # Asegúrate de tener un requirements.txt
     - name: Run cimel plotting
       run: |
-        python cimel_live_plots.py  # Ejecuta tu script
+        python cimel_scripts/cimel_live_plots.py  # Ejecuta tu script
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add .
