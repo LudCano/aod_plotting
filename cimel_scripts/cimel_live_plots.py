@@ -75,7 +75,7 @@ fig.legend(loc = 'center right', fontsize = 6)
 ax.grid(alpha = 0.3)
 ax.set_xlabel('Hour (UTC)')
 ax.set_ylabel('Aerosol Optical Depth')
-todayformatted = dt.datetime.strftime(today - dt.timedelta(minutes=today.minute), '%Y-%m-%d %H:%M UTC')
+todayformatted = dt.datetime.strftime(today, '%Y-%m-%d %H:%M UTC')
 ax.set_title(f'AOD LIVE (last update {todayformatted})', fontsize = 10)
 fig.savefig('current_plots/live_aod.png', dpi = 120)
 
