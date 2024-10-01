@@ -101,8 +101,7 @@ ax.set_ylabel('Aerosol Optical Depth (daily mean)')
 ax.set_title(f'AOD last {days_to_dwnload} days', fontsize = 10)
 fig.savefig(f'current_plots/week_aod.png', dpi = 120)
 
-if os.path.exists(f'aod_daily/{todayformatted}.png'):
-    os.remove(f'aod_daily/{todayformatted}.png')
+
 
 dfs2 = [proc_csv2(f'cimel_{i}.csv') for i in instruments]
 
@@ -120,6 +119,9 @@ ax.grid(alpha = 0.3)
 ax.set_xlabel('Hour (UTC)')
 ax.set_ylabel('Aerosol Optical Depth')
 todayformatted = dt.datetime.strftime(today - dt.timedelta(minutes=today.minute), '%Y-%m-%d')
+
+if os.path.exists(f'aod_daily/{todayformatted}.png'):
+    os.remove(f'aod_daily/{todayformatted}.png')
 ax.set_title(f'AOD {todayformatted}', fontsize = 10)
 fig.savefig(f'aod_daily/{todayformatted}.png', dpi = 120)
 
