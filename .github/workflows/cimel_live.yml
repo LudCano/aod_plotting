@@ -24,7 +24,7 @@ jobs:
         pip install -r requirements.txt  # Asegúrate de tener un requirements.txt
     - name: Run cimel plotting
       run: |
-        python goes_aod_series.py
+        python goes_scripts/goes_aod_series.py
         python cimel_scripts/cimel_live_plots.py  # Ejecuta tu script
         git config user.name github-actions
         git config user.email github-actions@github.com
