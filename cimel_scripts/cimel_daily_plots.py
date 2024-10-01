@@ -83,6 +83,7 @@ goes_daily = goes_aod.set_index('datetime')
 goes_daily = goes_daily.resample('1D').mean()
 goes_daily.reset_index(inplace = True)
 
+os.remove(f'current_plots/week_aod.png')
 
 fig, ax = plt.subplots(figsize=(7,3.5), dpi = 200)
 plot_aod500(ax, dfs, codenames, colors, goes_daily, codenames2, colors2)
@@ -100,7 +101,8 @@ ax.set_ylabel('Aerosol Optical Depth (daily mean)')
 ax.set_title(f'AOD last {days_to_dwnload} days', fontsize = 10)
 fig.savefig(f'current_plots/week_aod.png', dpi = 120)
 
-
+if os.path.exists(f'aod_daily/{todayformatted}.png'):
+    os.remove(f'aod_daily/{todayformatted}.png')
 
 dfs2 = [proc_csv2(f'cimel_{i}.csv') for i in instruments]
 
