@@ -11,7 +11,7 @@ import os
 
 
 ### DOWNLOADING LAST N DAYS
-days_to_dwnload = 3
+days_to_dwnload = 7
 today = dt.datetime.now()
 date_start = (today + dt.timedelta(days = -days_to_dwnload)).strftime('%Y-%m-%d')
 date_end = today.strftime('%Y-%m-%d')
@@ -31,10 +31,10 @@ colors = ['g','b','r']
 
 print('Downloading data...')
 
-for instrument in instruments:
-    req = f'wget --no-check-certificate  -q  -O cimel_{instrument}.csv "https://aeronet.gsfc.nasa.gov/cgi-bin/print_web_data_v3?site={instrument}&year={y0}&month={m0}&day={d0}&year2={yf}&month2={mf}&day2={df}&AOD15=1&AVG=10&if_no_html=1"'
-    os.system(req)
-    print(f'cimel_{instrument}.csv DOWNLOADED')
+# for instrument in instruments:
+#     req = f'wget --no-check-certificate  -q  -O cimel_{instrument}.csv "https://aeronet.gsfc.nasa.gov/cgi-bin/print_web_data_v3?site={instrument}&year={y0}&month={m0}&day={d0}&year2={yf}&month2={mf}&day2={df}&AOD15=1&AVG=10&if_no_html=1"'
+#     os.system(req)
+#     print(f'cimel_{instrument}.csv DOWNLOADED')
 
 fnames = [f'cimel_{i}.csv' for i in instruments]
 
@@ -58,8 +58,14 @@ def plot_aod440(ax, dfs,places, colors):
         ax.scatter(df.datetime, df[f'AOD_440nm'], marker = '+', label = f'{p} 440nm', c = c)
         #ax.scatter(df.datetime, df.AOD_440nm, marker = '+', label = f'{p} 440nm', c = c)
 
+
+
+goes_aod = pd.read_csv('aod_places.csv', parse_dates = ['datetime'])
 fig, ax = plt.subplots(figsize=(7,3.5), dpi = 200)
 plot_aod500(ax, dfs, codenames, colors)
+ax.scatter(goes_aod.datetime, goes_aod.chc, label = 'CHC 550nm')
+ax.scatter(goes_aod.datetime, goes_aod.lpz, label = 'LPZ 550nm')
+ax.scatter(goes_aod.datetime, goes_aod.scz, label = 'SCZ 550nm')
 fig.subplots_adjust(right=0.81, bottom = 0.2)
 fig.legend(loc = 'center right', fontsize = 6)
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%b'))
@@ -94,5 +100,6 @@ todayformatted = dt.datetime.strftime(today, '%Y-%m-%d %H:%M UTC')
 ax.set_title(f'AOD last {days_to_dwnload} days (last update {todayformatted})', fontsize = 10)
 fig.savefig('aod440.png', dpi = 120)
 
+plt.show()
 
-for f in fnames: os.remove(f)
+#for f in fnames: os.remove(f)

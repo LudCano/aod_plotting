@@ -1,4 +1,4 @@
-name: CIMEL auto plotting
+name: CIMEL live plotting
 
 on:
   schedule:
@@ -24,7 +24,7 @@ jobs:
         pip install -r requirements.txt  # Asegúrate de tener un requirements.txt
     - name: Run cimel plotting
       run: |
-        python download_cimel.py  # Ejecuta tu script
+        python cimel_live_plots.py  # Ejecuta tu script
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add .

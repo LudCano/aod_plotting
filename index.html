@@ -3,46 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizador de AOD</title>
+    <title>Gráficos</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            display: flex;
             margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .col-izquierda {
+            flex: 3;
             padding: 20px;
-            background-color: #f9f9f9;
         }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .image-container {
+        .col-derecha {
+            flex: 2;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            margin-bottom: 40px;
+            padding: 20px;
         }
-        img {
+        .grafico {
+            margin-bottom: 20px;
+            border: 1px solid #ccc; /* Opcional: agrega un borde para mejor visualización */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .grafico img {
             max-width: 100%;
-            height: auto;
-            border-radius: 8px;
+            height: auto; /* Asegura que la imagen se adapte al contenedor */
         }
     </style>
 </head>
 <body>
 
-    <h1>AUTOMATED PLOTS</h1>
-
-    <div class="image-container">
-        <h2>AOD 440nm</h2>
-        <img src="aod440.png" alt="Descripción de la imagen 1">
+    <div class="col-izquierda">
+        <h2>Composite AOD</h2>
+        <div class="grafico grande">
+            <img src="current_plots/composite.png" alt="Gráfico Grande">
+        </div>
     </div>
 
-    <div class="image-container">
-        <h2>AOD 500nm</h2>
-        <img src="aod500.png" alt="Descripción de la imagen 2">
+    <div class="col-derecha">
+        <h2>AOD en vivo</h2>
+        <div class="grafico medio">
+            <img src="current_plots/live_aod.png" alt="Gráfico Medio 1">
+        </div>
+        <h2>AOD últimos 7 días</h2>
+        <div class="grafico medio">
+            <img src="current_plots/week_aod.png" alt="Gráfico Medio 2">
+        </div>
     </div>
-
-    <!-- Repite según sea necesario para más imágenes -->
 
 </body>
 </html>
