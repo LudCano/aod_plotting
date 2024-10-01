@@ -2,7 +2,7 @@ name: CIMEL live plotting
 
 on:
   schedule:
-    - cron: '30 11-21 * * *'  # Ejecutar cada hora; ajusta según lo necesites
+    - cron: '0,30 11-21 * * *'  # Ejecutar cada hora; ajusta según lo necesites
   workflow_dispatch:
 
 jobs:
