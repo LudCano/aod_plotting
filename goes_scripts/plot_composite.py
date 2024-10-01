@@ -150,7 +150,9 @@ image_title = f'GOES-16/ABI Aerosol Optical Depth  {todaytitle}  ' + gen_hour(st
 # Add plot title
 plt.title(image_title, pad=8, size=8, weight='bold')
 
-fig.savefig(f'composite{forfname}.png', dpi = 500)
+fig.savefig(f'composites/composite{forfname}.png', dpi = 500)
+os.remove('current_figures/composite.png')
+fig.savefig(f'current_figures/composite.png', dpi = 500)
 for f in os.listdir(dir_data):
     pth = os.path.join(dir_data, f)
     os.remove(pth)
