@@ -78,7 +78,11 @@ h = day.hour
 julian_day = dt.datetime(y, m, d).strftime('%j')
 print("JULIAN DAY: ----",julian_day)
 data_path = bucket + '/' + product + '/'  + str(y) + '/' + julian_day + '/' + str(h).zfill(2)
-fils = sorted(fs.ls(data_path))
+flg_success = True
+try:
+    fils = sorted(fs.ls(data_path))
+except:
+    flg_success = False
 if len(fils) == 0:
     print('ERROR: No data in the last hour')
     quit()
