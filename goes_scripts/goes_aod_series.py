@@ -83,6 +83,8 @@ try:
     fils = sorted(fs.ls(data_path))
 except:
     flg_success = False
+    print('NO DATA!!')
+    fils = []
 if len(fils) == 0:
     print('ERROR: No data in the last hour')
     quit()
