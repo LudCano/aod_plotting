@@ -2,7 +2,7 @@ name: Goes composite
 
 on:
   schedule:
-    - cron: '0 15 * * *'  # Ejecuta todos los días a las 15:00 UTC
+    - cron: '20 15 * * *'  # Ejecuta todos los días a las 15:00 UTC
   workflow_dispatch:
 jobs:
   run_python_script:
