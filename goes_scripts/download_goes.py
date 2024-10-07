@@ -44,7 +44,7 @@ import h5netcdf
 
 
 today = dt.datetime.now()
-today = today.date().strftime('%Y-%m-%d')
+today = today.date().strftime('%Y-%m-%d') - dt.timedelta(hours = 10)
 print('TODAY IS' ,today)
 date0 = today
 datef = today
