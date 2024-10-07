@@ -42,7 +42,7 @@ from tqdm import tqdm        # barra de progreso
 import h5netcdf
 
 
-today = dt.datetime.now() - dt.timedelta(hours = 10)
+today = dt.datetime.now() 
 today = today.date().strftime('%Y-%m-%d')
 print('TODAY IS' ,today)
 date0 = today
