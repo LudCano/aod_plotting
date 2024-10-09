@@ -105,7 +105,7 @@ ax = plt.axes(projection=geo_projection)
 
 # Set geographic domain of map: [W_lon, E_lon, S_lat, N_lat]
 # °E longitude > 0 > °W longitude, °N latitude > 0 > °S latitude
-ax.set_extent([-82, -35, -29, 2], crs=ccrs.PlateCarree())   #small one
+ax.set_extent([-82, -40, -27, 2], crs=ccrs.PlateCarree())   #small one
 
 # Format lat/lon gridlines using cartopy
 lon_ticks = np.arange(-90, -20, 5)
@@ -158,7 +158,7 @@ cities = ['LP','CBBA','SCZ']
 citiespos = [(-68.15,-16.5),(-66.15,-17.389),(-63.18,-17.786)]
 
 # Definir el efecto de contorno
-stroke_effect = withStroke(linewidth=1, foreground='black')
+stroke_effect = withStroke(linewidth=0.5, foreground='white')
 # Añadir una anotación con estilo
 
 for c, p in zip(cities, citiespos):
