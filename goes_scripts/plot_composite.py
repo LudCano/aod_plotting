@@ -150,6 +150,32 @@ image_title = f'GOES-16/ABI Aerosol Optical Depth  {todaytitle}  ' + gen_hour(st
 # Add plot title
 plt.title(image_title, pad=8, size=8, weight='bold')
 
+
+from matplotlib.patheffects import withStroke
+
+
+cities = ['LP','CBBA','SCZ']
+citiespos = [(-68.15,-16.5),(-66.15,-17.389),(-63.18,-17.786)]
+
+# Definir el efecto de contorno
+stroke_effect = withStroke(linewidth=1, foreground='black')
+# Añadir una anotación con estilo
+
+for c, p in zip(cities, citiespos):
+    ax.annotate(
+        c,
+        xy=(p[0], p[1]-1),  # Coordenadas de la anotación
+        xytext=(p[0], p[1]-1),  # Coordenadas del texto
+        fontsize=7,
+                color='white',  # Color de relleno
+                path_effects=[stroke_effect],  # Efecto de borde
+                ha='center', va='center', transform=ccrs.PlateCarree()
+    )
+
+    # Marcar un punto con estilo
+    ax.scatter(p[0],p[1], color='white', edgecolor='black', s=20, linewidth=1, transform=ccrs.PlateCarree())
+
+
 fig.savefig(f'composites/composite{forfname}.png', dpi = 500)
 os.remove('current_plots/composite.png')
 fig.savefig(f'current_plots/composite.png', dpi = 500)
