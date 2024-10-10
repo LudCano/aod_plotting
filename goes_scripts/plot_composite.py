@@ -143,7 +143,7 @@ cb.ax.set_xticklabels(['0', '1','2','3','4'])
 def gen_hour(x):
     stri = x[0:2]  + ':' + x[2:]
     return stri
-todaytitle0 = dt.datetime.now() - dt.timedelta(days = 3)
+todaytitle0 = dt.datetime.now()
 todaytitle = todaytitle0.date().strftime('%d %b %Y')
 forfname = todaytitle0.date().strftime('%d%b')
 image_title = f'GOES-16/ABI Aerosol Optical Depth  {todaytitle}  ' + gen_hour(start) + '-' + gen_hour(end) +' UTC Composite'
