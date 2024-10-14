@@ -32,6 +32,23 @@
             height: auto; /* Asegura que la imagen se adapte al contenedor */
         }
 
+        /* Punto rojo que titila */
+        .punto {
+            width: 10px; /* Ancho del punto */
+            height: 10px; /* Altura del punto */
+            border-radius: 50%; /* Hace el punto redondo */
+            background-color: red; /* Color del punto */
+            display: inline-block; /* Para que se muestre en línea con el texto */
+            margin-right: 5px; /* Espacio entre el punto y el texto */
+            animation: titilar 1s infinite; /* Llama a la animación */
+        }
+
+        @keyframes titilar {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
         /* Media query para dispositivos móviles */
         @media (max-width: 600px) {
             body {
@@ -54,7 +71,10 @@
     </div>
 
     <div class="col-derecha">
-        <h2>AOD en vivo</h2>
+        <h2>
+            <span class="punto"></span>
+            AOD en vivo
+        </h2>
         <div class="grafico medio">
             <img src="current_plots/live_aod.png" alt="Gráfico Medio 1">
         </div>
