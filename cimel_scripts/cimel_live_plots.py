@@ -48,6 +48,7 @@ def proc_csv2(ifile):
     datetime2 = pd.to_datetime(df2['Date(dd:mm:yyyy)'] + ' ' + df2['Time(hh:mm:ss)'], format='%d:%m:%Y %H:%M:%S')
     df2['datetime'] = datetime2
     df2 = df2.loc[:,['datetime', 'AOD_500nm', 'AOD_440nm']]
+    df2 = df2[(df2.AOD_500nm > -1) & (df2.AOD_440nm > -1)]
     return df2
 
 def plot_aod500_day(ax, dfs,places, colors, df2, places2, colors2):
