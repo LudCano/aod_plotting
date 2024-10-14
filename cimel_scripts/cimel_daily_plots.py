@@ -47,6 +47,7 @@ def proc_csv(ifile):
     datetime2 = pd.to_datetime(df2['Date(dd:mm:yyyy)'] + ' ' + df2['Time(hh:mm:ss)'], format='%d:%m:%Y %H:%M:%S')
     df2['datetime'] = datetime2
     df2 = df2.loc[:,['datetime', 'AOD_500nm', 'AOD_440nm']]
+    df2 = df2[(df2.AOD_500nm > -1) & (df2.AOD_440nm > -1)]
     df2.set_index('datetime', inplace = True)
     df2 = df2.resample('1D').mean()
     df2.reset_index(inplace=True)
