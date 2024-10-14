@@ -1,0 +1,20 @@
+.en-vivo {
+    display: flex;
+    align-items: center;
+    font-size: 20px; /* Tamaño de la fuente */
+}
+
+.punto {
+    width: 10px; /* Ancho del punto */
+    height: 10px; /* Altura del punto */
+    border-radius: 50%; /* Hace el punto redondo */
+    background-color: red; /* Color del punto */
+    margin-right: 5px; /* Espacio entre el punto y el texto */
+    animation: titilar 1s infinite; /* Llama a la animación */
+}
+
+@keyframes titilar {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
