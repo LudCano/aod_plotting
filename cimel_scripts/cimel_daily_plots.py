@@ -101,6 +101,7 @@ ax.grid(which='minor', axis = 'x', alpha = 0.3)
 ax.set_xlabel('Date')
 ax.set_ylabel('Aerosol Optical Depth (daily mean)')
 ax.set_title(f'AOD last {days_to_dwnload} days', fontsize = 10)
+ax.set_xlim(today - dt.timedelta(days = 7), today) ## NEW ONLY THIS WEEK!
 fig.savefig(f'current_plots/week_aod.png', dpi = 120)
 
 
