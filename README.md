@@ -11,3 +11,4 @@ This code generates automatically the following products:
 (*) _Important:_ this plots (or data) won't be generated (or retrieved) until the GOES satellite AWS's service is up again
 
 Written by [Ludving Cano](mailto:lcano@chacaltaya.edu.bo) based on the code from ARSET.
+Needs to be updated!
